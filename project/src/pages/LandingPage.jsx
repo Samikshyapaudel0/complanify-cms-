@@ -265,7 +265,7 @@ const LandingPage = () => {
               <Button size="lg" variant="secondary" className="bg-white text-blue-600 hover:bg-gray-100">
                 Start as Student
               </Button>
-            </Link>
+            </Link>cd
             <Link to="/admin/login">
               <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600">
                 Admin Access
