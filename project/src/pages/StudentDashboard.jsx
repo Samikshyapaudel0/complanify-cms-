@@ -199,7 +199,107 @@ const StudentDashboard = () => {
         </div>
       </header>
 
-      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Dashboard Tab */}
+        {activeTab === 'dashboard' && (
+          <div className="space-y-8">
+            {/* Welcome Section */}
+            <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl p-8 text-white">
+              <h1 className="text-3xl font-bold mb-2">Welcome back, {user?.name}!</h1>
+              <p className="text-blue-100 mb-6">
+                Track your complaints and stay updated on their progress.
+              </p>
+              <Button
+                onClick={() => setShowComplaintModal(true)}
+                className="bg-white text-blue-600 hover:bg-gray-100"
+              >
+                <Plus className="w-5 h-5 mr-2" />
+                Submit New Complaint
+              </Button>
+            </div>
+
+            {/* Stats Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              <Card className="text-center">
+                <div className="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <FileText className="w-6 h-6 text-blue-600" />
+                </div>
+                <div className="text-2xl font-bold text-gray-900 mb-1">{stats.total}</div>
+                <div className="text-sm text-gray-600">Total Complaints</div>
+              </Card>
+
+              <Card className="text-center">
+                <div className="bg-yellow-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Clock className="w-6 h-6 text-yellow-600" />
+                </div>
+                <div className="text-2xl font-bold text-gray-900 mb-1">{stats.pending}</div>
+                <div className="text-sm text-gray-600">Pending</div>
+              </Card>
+
+              <Card className="text-center">
+                <div className="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <AlertCircle className="w-6 h-6 text-blue-600" />
+                </div>
+                <div className="text-2xl font-bold text-gray-900 mb-1">{stats.inReview}</div>
+                <div className="text-sm text-gray-600">In Review</div>
+              </Card>
+
+              <Card className="text-center">
+                <div className="bg-green-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <CheckCircle className="w-6 h-6 text-green-600" />
+                </div>
+                <div className="text-2xl font-bold text-gray-900 mb-1">{stats.resolved}</div>
+                <div className="text-sm text-gray-600">Resolved</div>
+              </Card>
+            </div>
+
+            {/* Recent Complaints */}
+            <Card>
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-bold text-gray-900">Recent Complaints</h2>
+                <Button
+                  onClick={() => setActiveTab('complaints')}
+                  variant="outline"
+                  size="sm"
+                >
+                  View All
+                </Button>
+              </div>
+              
+              <div className="space-y-4">
+                {complaints.slice(0, 3).map((complaint) => (
+                  <div key={complaint.id} className="border border-gray-200 rounded-lg p-4">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <h3 className="font-semibold text-gray-900 mb-1">{complaint.title}</h3>
+                        <p className="text-gray-600 text-sm mb-2">{complaint.description}</p>
+                        <div className="flex items-center space-x-4 text-sm text-gray-500">
+                          <span className="flex items-center">
+                            <Calendar className="w-4 h-4 mr-1" />
+                            {complaint.date}
+                          </span>
+                          <span className={`font-medium ${getPriorityColor(complaint.priority)}`}>
+                            {complaint.priority.toUpperCase()} Priority
+                          </span>
+                        </div>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium flex items-center ${getStatusColor(complaint.status)}`}>
+                          {getStatusIcon(complaint.status)}
+                          <span className="ml-1 capitalize">{complaint.status.replace('-', ' ')}</span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Card>
+          </div>
+        )}
+
+        
+        </div>
+      )}
     </div>
   );
 };
