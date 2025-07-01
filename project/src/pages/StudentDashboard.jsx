@@ -454,6 +454,115 @@ const StudentDashboard = () => {
         )}
       </div>
 
+      {/* Complaint Modal */}
+      {showComplaintModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-bold text-gray-900">Submit New Complaint</h2>
+                <button
+                  onClick={() => setShowComplaintModal(false)}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  ×
+                </button>
+              </div>
+
+              <form onSubmit={handleSubmitComplaint} className="space-y-6">
+                <Input
+                  label="Complaint Title"
+                  placeholder="Brief description of your complaint"
+                  value={complaintForm.title}
+                  onChange={(e) => setComplaintForm({ ...complaintForm, title: e.target.value })}
+                  required
+                />
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Detailed Description *
+                  </label>
+                  <textarea
+                    rows={4}
+                    placeholder="Provide detailed information about your complaint"
+                    value={complaintForm.description}
+                    onChange={(e) => setComplaintForm({ ...complaintForm, description: e.target.value })}
+                    required
+                    className="input-field"
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Category *
+                    </label>
+                    <select
+                      value={complaintForm.category}
+                      onChange={(e) => setComplaintForm({ ...complaintForm, category: e.target.value })}
+                      required
+                      className="input-field"
+                    >
+                      <option value="">Select Category</option>
+                      <option value="Infrastructure">Infrastructure</option>
+                      <option value="Food Services">Food Services</option>
+                      <option value="Academic">Academic</option>
+                      <option value="Transportation">Transportation</option>
+                      <option value="Library">Library</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Priority
+                    </label>
+                    <select
+                      value={complaintForm.priority}
+                      onChange={(e) => setComplaintForm({ ...complaintForm, priority: e.target.value })}
+                      className="input-field"
+                    >
+                      <option value="low">Low</option>
+                      <option value="medium">Medium</option>
+                      <option value="high">High</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Attach File (Optional)
+                  </label>
+                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                    <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
+                    <p className="text-sm text-gray-600">
+                      Click to upload or drag and drop
+                    </p>
+                    <input
+                      type="file"
+                      className="hidden"
+                      onChange={(e) => setComplaintForm({ ...complaintForm, file: e.target.files[0] })}
+                    />
+                  </div>
+                </div>
+
+                <div className="flex justify-end space-x-4">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => setShowComplaintModal(false)}
+                  >
+                    Cancel
+                  </Button>
+                  <Button type="submit">
+                    Submit Complaint
+                  </Button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
