@@ -297,9 +297,163 @@ const StudentDashboard = () => {
           </div>
         )}
 
-        
-        </div>
-      )}
+        {/* Complaints Tab */}
+        {activeTab === 'complaints' && (
+          <div className="space-y-6">
+            <div className="flex items-center justify-between">
+              <h1 className="text-2xl font-bold text-gray-900">My Complaints</h1>
+              <Button onClick={() => setShowComplaintModal(true)}>
+                <Plus className="w-5 h-5 mr-2" />
+                New Complaint
+              </Button>
+            </div>
+
+            {/* Search and Filter */}
+            <Card>
+              <div className="flex flex-col md:flex-row gap-4">
+                <div className="flex-1">
+                  <Input
+                    placeholder="Search complaints..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    icon={<Search className="w-5 h-5" />}
+                  />
+                </div>
+                <div className="flex items-center space-x-4">
+                  <select
+                    value={filterStatus}
+                    onChange={(e) => setFilterStatus(e.target.value)}
+                    className="input-field"
+                  >
+                    <option value="all">All Status</option>
+                    <option value="pending">Pending</option>
+                    <option value="in-review">In Review</option>
+                    <option value="resolved">Resolved</option>
+                  </select>
+                </div>
+              </div>
+            </Card>
+
+            {/* Complaints List */}
+            <div className="space-y-4">
+              {filteredComplaints.map((complaint) => (
+                <Card key={complaint.id}>
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-3 mb-2">
+                        <h3 className="font-semibold text-gray-900">{complaint.title}</h3>
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium flex items-center ${getStatusColor(complaint.status)}`}>
+                          {getStatusIcon(complaint.status)}
+                          <span className="ml-1 capitalize">{complaint.status.replace('-', ' ')}</span>
+                        </span>
+                      </div>
+                      
+                      <p className="text-gray-600 mb-3">{complaint.description}</p>
+                      
+                      <div className="flex items-center space-x-6 text-sm text-gray-500 mb-3">
+                        <span className="flex items-center">
+                          <Calendar className="w-4 h-4 mr-1" />
+                          {complaint.date}
+                        </span>
+                        <span>Category: {complaint.category}</span>
+                        <span className={`font-medium ${getPriorityColor(complaint.priority)}`}>
+                          {complaint.priority.toUpperCase()} Priority
+                        </span>
+                      </div>
+
+                      {complaint.response && (
+                        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                          <div className="flex items-center mb-2">
+                            <MessageSquare className="w-4 h-4 text-blue-600 mr-2" />
+                            <span className="text-sm font-medium text-blue-800">Admin Response</span>
+                          </div>
+                          <p className="text-sm text-blue-700">{complaint.response}</p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+
+            {filteredComplaints.length === 0 && (
+              <Card className="text-center py-12">
+                <FileText className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                <h3 className="text-lg font-medium text-gray-900 mb-2">No complaints found</h3>
+                <p className="text-gray-600 mb-4">
+                  {searchTerm || filterStatus !== 'all' 
+                    ? 'Try adjusting your search or filter criteria.'
+                    : 'You haven\'t submitted any complaints yet.'
+                  }
+                </p>
+                {!searchTerm && filterStatus === 'all' && (
+                  <Button onClick={() => setShowComplaintModal(true)}>
+                    Submit Your First Complaint
+                  </Button>
+                )}
+              </Card>
+            )}
+          </div>
+        )}
+
+        {/* Profile Tab */}
+        {activeTab === 'profile' && (
+          <div className="space-y-6">
+            <h1 className="text-2xl font-bold text-gray-900">Profile Settings</h1>
+            
+            <Card>
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">Personal Information</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Input
+                  label="Full Name"
+                  value={user?.name || ''}
+                  readOnly
+                  className="bg-gray-50"
+                />
+                <Input
+                  label="Email Address"
+                  value={user?.email || ''}
+                  readOnly
+                  className="bg-gray-50"
+                />
+                <Input
+                  label="Student ID"
+                  value={user?.studentId || ''}
+                  readOnly
+                  className="bg-gray-50"
+                />
+                <Input
+                  label="Role"
+                  value="Student"
+                  readOnly
+                  className="bg-gray-50"
+                />
+              </div>
+            </Card>
+
+            <Card>
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">Account Statistics</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-blue-600 mb-1">{stats.total}</div>
+                  <div className="text-sm text-gray-600">Total Complaints</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-green-600 mb-1">{stats.resolved}</div>
+                  <div className="text-sm text-gray-600">Resolved</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-yellow-600 mb-1">
+                    {stats.total > 0 ? Math.round((stats.resolved / stats.total) * 100) : 0}%
+                  </div>
+                  <div className="text-sm text-gray-600">Resolution Rate</div>
+                </div>
+              </div>
+            </Card>
+          </div>
+        )}
+      </div>
+
     </div>
   );
 };
