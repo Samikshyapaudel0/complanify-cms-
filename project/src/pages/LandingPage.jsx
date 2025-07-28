@@ -224,7 +224,7 @@ const LandingPage = () => {
                 ))}
               </div>
               <p className="text-gray-600 mb-6 italic">"COMPLANIFY has revolutionized how we handle student concerns. The transparency and efficiency are remarkable."</p>
-              <div className="font-semibold text-gray-900">Sarah Johnson</div>
+              <div className="font-semibold text-gray-900">Sahara Gaudel</div>
               <div className="text-gray-500">Dean of Students, University College</div>
             </Card>
             
@@ -235,7 +235,7 @@ const LandingPage = () => {
                 ))}
               </div>
               <p className="text-gray-600 mb-6 italic">"Finally, a platform where my voice is heard! The tracking system keeps me informed every step of the way."</p>
-              <div className="font-semibold text-gray-900">Michael Chen</div>
+              <div className="font-semibold text-gray-900">Monika Pun</div>
               <div className="text-gray-500">Computer Science Student</div>
             </Card>
             
@@ -246,7 +246,7 @@ const LandingPage = () => {
                 ))}
               </div>
               <p className="text-gray-600 mb-6 italic">"The analytics dashboard provides invaluable insights that help us improve our institution continuously."</p>
-              <div className="font-semibold text-gray-900">Dr. Emily Rodriguez</div>
+              <div className="font-semibold text-gray-900">Dr. Kiran Rana</div>
               <div className="text-gray-500">Academic Administrator</div>
             </Card>
           </div>
@@ -262,10 +262,10 @@ const LandingPage = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link to="/student/signup">
-              <Button size="lg" variant="secondary" className="bg-white text-blue-600 hover:bg-gray-100">
+              <Button size="lg" variant="secondary" className="border-white text-white hover:bg-white hover:text-blue-600">
                 Start as Student
               </Button>
-            </Link>cd
+            </Link>or
             <Link to="/admin/login">
               <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600">
                 Admin Access

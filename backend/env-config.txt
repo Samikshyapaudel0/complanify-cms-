@@ -1,0 +1,35 @@
+# Copy this content to your .env file
+
+# Database Configuration
+PG_HOST=localhost
+PG_PORT=5432
+PG_DATABASE=authdb
+PG_USER=postgres
+PG_PASSWORD=admin123
+DATABASE_URL=postgresql://postgres:admin123@localhost:5432/authdb
+
+# JWT Configuration
+JWT_SECRET=your_jwt_secret_here
+JWT_EXPIRE=24h
+
+# Email Configuration
+EMAIL_USER=your_email@gmail.com
+EMAIL_APP_PASSWORD=your_gmail_app_password_16chars
+
+# Server Configuration
+PORT=5000
+NODE_ENV=development
+
+# File Upload Configuration
+UPLOAD_PATH=uploads/
+MAX_FILE_SIZE=5242880
+
+# Rate Limiting
+RATE_LIMIT_WINDOW_MS=900000
+RATE_LIMIT_MAX_REQUESTS=100
+
+# CORS Configuration
+CORS_ORIGIN=http://localhost:3000
+
+# Security
+BCRYPT_ROUNDS=12 

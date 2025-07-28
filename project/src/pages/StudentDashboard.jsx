@@ -211,7 +211,7 @@ const StudentDashboard = () => {
               </p>
               <Button
                 onClick={() => setShowComplaintModal(true)}
-                className="bg-white text-blue-600 hover:bg-gray-100"
+                className="bg-yellow text-Red-600 hover:bg-gray-100"
               >
                 <Plus className="w-5 h-5 mr-2" />
                 Submit New Complaint
